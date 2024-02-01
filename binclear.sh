@@ -43,8 +43,8 @@ folders=()
 
 IFS=$'\n'
 for dir in $(find . -type d | grep 'obj$\|bin$'); do
-  FILENAME_SIZE=$(du "$dir" -s -h | tee /dev/fd/5)
-  FILENAME=$(echo $FILENAME_SIZE | awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}')
+  FILESIZE=$(du "$dir" -s -h | tee /dev/fd/5)
+  FILENAME=$(echo $FILESIZE | awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}')
 
   folders+=($FILENAME)
 done
@@ -53,7 +53,7 @@ echo ""
 
 for value in ${folders[@]}; do
   if [[ "$CONFIRM" == 'yes' ]]; then
-    printf "[${value}] Would you like to remove [Y/n]? "
+    printf "[${value}] Would you like to remove it [Y/n]? "
     read n
 
     if [[ $n == 'q' ]]; then
