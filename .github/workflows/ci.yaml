@@ -1,0 +1,14 @@
+name: Github Actions CI
+on:
+    push:
+    workflow_dispatch:
+jobs:
+  pipeline:
+    name: Github Actions CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build And Clean
+        uses: ./.github/actions/action-a

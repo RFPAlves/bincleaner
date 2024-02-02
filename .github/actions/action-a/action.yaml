@@ -1,0 +1,5 @@
+name: 'My Action'
+description: 'Build a .Net application and then clean the bin and obj folders.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

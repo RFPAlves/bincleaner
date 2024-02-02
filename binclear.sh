@@ -36,6 +36,9 @@ fi
 
 set -euo pipefail
 
+echo "The cleaning process has started, it may take a few minutes."
+echo ""
+
 pushd $DIRECTORY >/dev/null 2>&1
 
 exec 5>&1
