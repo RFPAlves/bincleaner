@@ -36,6 +36,9 @@ fi
 
 set -euo pipefail
 
+GREEN="\e[1;32m"
+RESET="\e[0m"
+
 echo "The cleaning process has started, it may take a few minutes."
 echo ""
 
@@ -45,7 +48,7 @@ exec 5>&1
 folders=()
 
 IFS=$'\n'
-for dir in $(find . -type d | grep 'obj$\|bin$'); do
+for dir in $(find . -type d 2>/dev/null | grep 'obj$\|bin$'); do
   FILESIZE=$(du "$dir" -s -h | tee /dev/fd/5)
   FILENAME=$(echo $FILESIZE | awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}')
 
@@ -56,7 +59,7 @@ echo ""
 
 for value in ${folders[@]}; do
   if [[ "$CONFIRM" == 'yes' ]]; then
-    printf "[${value}] Would you like to remove it [Y/n]? "
+    printf "${GREEN}[${value}]${RESET} Would you like to remove it [Y/n]? "
     read n
 
     if [[ $n == 'q' ]]; then
@@ -69,7 +72,7 @@ for value in ${folders[@]}; do
   fi
 
   rm -rf $value
-  printf "[${value}] Removed.\n"
+  printf "${GREEN}[${value}]${RESET} Removed.\n"
 done
 
 popd >/dev/null 2>&1
